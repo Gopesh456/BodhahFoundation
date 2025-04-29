@@ -1,6 +1,11 @@
 {
+  "/api/books/[id]/route": "app/api/books/[id]/route.js",
   "/api/books/route": "app/api/books/route.js",
+  "/api/download/[id]/route": "app/api/download/[id]/route.js",
+  "/api/pdf-thumbnail/route": "app/api/pdf-thumbnail/route.js",
   "/api/upload/route": "app/api/upload/route.js",
-  "/page": "app/page.js",
-  "/books/[id]/page": "app/books/[id]/page.js"
+  "/api/view/[id]/route": "app/api/view/[id]/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/books/[id]/page": "app/books/[id]/page.js",
+  "/page": "app/page.js"
 }
