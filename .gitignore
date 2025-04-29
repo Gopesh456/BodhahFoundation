@@ -1,0 +1,11 @@
+node_modules
+books
+.next/cache/webpack/client-development
+.next/cache/webpack/server-development/0.pack.gz
+.next/cache/webpack/server-development/1.pack.gz
+.next/cache/webpack/server-development/2.pack.gz
+.next/cache/webpack/server-development/4.pack.gz
+.next/cache/webpack/server-development/3.pack.gz
+.next/cache/webpack/server-development/5.pack.gz
+.next/cache/webpack/server-development/6.pack.gz
+.next/cache/webpack/server-development/index.pack.gz
