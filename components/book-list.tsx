@@ -1,51 +1,59 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { BookCard } from "@/components/book-card"
-import { Input } from "@/components/ui/input"
-import { Search } from "lucide-react"
-import { motion } from "framer-motion"
+import { useEffect, useState } from "react";
+import { BookCard } from "@/components/book-card";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
+import { motion } from "framer-motion";
+import React from "react";
 
 interface Book {
-  id: string
-  title: string
-  year: string
-  file: string
+  id: string;
+  title: string;
+  year: string;
+  file: string;
 }
 
-export function BookList() {
-  const [books, setBooks] = useState<Book[]>([])
-  const [filteredBooks, setFilteredBooks] = useState<Book[]>([])
-  const [loading, setLoading] = useState(true)
-  const [searchQuery, setSearchQuery] = useState("")
+type BookListProps = {
+  onDownload?: () => void;
+  // ...other props...
+};
+
+export function BookList({ onDownload, ...props }: BookListProps) {
+  const [books, setBooks] = useState<Book[]>([]);
+  const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await fetch("/api/books")
-        const data = await response.json()
-        setBooks(data)
-        setFilteredBooks(data)
+        const response = await fetch("/api/books");
+        const data = await response.json();
+        setBooks(data);
+        setFilteredBooks(data);
       } catch (error) {
-        console.error("Error fetching books:", error)
+        console.error("Error fetching books:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchBooks()
-  }, [])
+    fetchBooks();
+  }, []);
 
   useEffect(() => {
     if (searchQuery.trim() === "") {
-      setFilteredBooks(books)
+      setFilteredBooks(books);
     } else {
       const filtered = books.filter(
-        (book) => book.title.toLowerCase().includes(searchQuery.toLowerCase()) || book.year.includes(searchQuery),
-      )
-      setFilteredBooks(filtered)
+        (book) =>
+          book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          book.year.includes(searchQuery)
+      );
+      setFilteredBooks(filtered);
     }
-  }, [searchQuery, books])
+  }, [searchQuery, books]);
 
   const container = {
     hidden: { opacity: 0 },
@@ -55,7 +63,13 @@ export function BookList() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
+
+  const handleDownload = (book: any) => {
+    // ...existing download logic...
+    if (onDownload) onDownload();
+    // ...existing code...
+  };
 
   return (
     <div id="book-list">
@@ -97,5 +111,5 @@ export function BookList() {
         </motion.div>
       )}
     </div>
-  )
+  );
 }

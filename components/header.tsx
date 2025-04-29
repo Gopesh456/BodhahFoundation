@@ -19,7 +19,7 @@ export function Header() {
           <motion.div whileHover={{ rotate: 10 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
             <Book className="h-6 w-6" />
           </motion.div>
-          <span className="text-xl font-bold">Modern Library</span>
+          <span className="text-xl font-bold">Bhavana Library</span>
         </Link>
         <div className="flex items-center gap-4">
           <Button variant="ghost" asChild>
