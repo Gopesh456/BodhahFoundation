@@ -4,7 +4,8 @@ import path from "path"
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
-    const id = params.id
+    // Ensure params is properly handled
+    const { id } = params
     const filename = Buffer.from(id, "base64").toString()
 
     const booksDir = path.join(process.cwd(), "books")

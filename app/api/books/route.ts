@@ -11,14 +11,38 @@ export async function GET() {
       return NextResponse.json([])
     }
 
-    // Read the books directory
-    const files = fs.readdirSync(booksDir)
+    // Create metadata directory if it doesn't exist
+    const metadataDir = path.join(booksDir, "metadata")
+    if (!fs.existsSync(metadataDir)) {
+      fs.mkdirSync(metadataDir, { recursive: true })
+    }
 
-    // Filter for PDF files
-    const pdfFiles = files.filter((file) => file.endsWith(".pdf"))
+    // Read the books directory
+    const files = fs.readdirSync(booksDir).filter((file) => file !== "metadata" && file.endsWith(".pdf"))
 
     // Create book objects
-    const books = pdfFiles.map((file) => {
+    const books = files.map((file) => {
+      const id = Buffer.from(file).toString("base64")
+      const metadataPath = path.join(metadataDir, id + ".json")
+
+      // Check if metadata exists
+      if (fs.existsSync(metadataPath)) {
+        try {
+          const metadata = JSON.parse(fs.readFileSync(metadataPath, "utf-8"))
+          return {
+            id,
+            title: metadata.title,
+            author: metadata.author,
+            year: metadata.year,
+            overview: metadata.overview,
+            file,
+          }
+        } catch (error) {
+          console.error(`Error reading metadata for ${file}:`, error)
+        }
+      }
+
+      // Fallback if no metadata or error reading it
       // Extract title and year from filename (assuming format like "Title (Year).pdf")
       const match = file.match(/(.+?)(?:\s*$$(\d{4})$$)?.pdf$/i)
 
@@ -31,9 +55,11 @@ export async function GET() {
       }
 
       return {
-        id: Buffer.from(file).toString("base64"),
+        id,
         title,
+        author: "Unknown",
         year,
+        overview: "",
         file,
       }
     })

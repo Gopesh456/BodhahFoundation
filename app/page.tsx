@@ -1,8 +1,6 @@
-"use client";
-import { BookList } from "@/components/book-list";
-import { Hero } from "@/components/hero";
-import { UploadButton } from "@/components/upload-button";
-import { toast } from "sonner";
+import { BookList } from "@/components/book-list"
+import { Hero } from "@/components/hero"
+import { UploadButton } from "@/components/upload-button"
 
 export default function Home() {
   return (
@@ -11,22 +9,15 @@ export default function Home() {
       <div className="container px-4 py-12 md:py-24">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">
-              Library Collection
-            </h2>
+            <h2 className="text-3xl font-bold tracking-tight">Library Collection</h2>
             <p className="text-muted-foreground mt-2">
               Browse our collection of books available for reading and download.
             </p>
           </div>
-          <UploadButton
-            onSuccess={() => {
-              toast.success("Book uploaded successfully!");
-              window.location.reload();
-            }}
-          />
+          <UploadButton />
         </div>
-        <BookList onDownload={() => toast.success("Book downloaded!")} />
+        <BookList />
       </div>
     </main>
-  );
+  )
 }

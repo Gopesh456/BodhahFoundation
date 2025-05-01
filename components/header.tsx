@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Book } from "lucide-react"
+import { Book, Wand2 } from "lucide-react"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
@@ -19,7 +19,7 @@ export function Header() {
           <motion.div whileHover={{ rotate: 10 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
             <Book className="h-6 w-6" />
           </motion.div>
-          <span className="text-xl font-bold">Bhavana Library</span>
+          <span className="text-xl font-bold">Modern Library</span>
         </Link>
         <div className="flex items-center gap-4">
           <Button variant="ghost" asChild>

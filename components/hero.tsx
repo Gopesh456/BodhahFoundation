@@ -38,8 +38,8 @@ export function Hero() {
             <Button size="lg" asChild>
               <a href="#book-list">Browse Collection</a>
             </Button>
-            <Button size="lg" variant="outline">
-              <a href="#upload">Upload Book</a>
+            <Button size="lg" variant="outline" onClick={() => document.getElementById("upload-trigger")?.click()}>
+              Upload Book
             </Button>
           </motion.div>
         </motion.div>
